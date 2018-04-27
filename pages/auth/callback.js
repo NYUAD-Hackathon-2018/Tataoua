@@ -12,19 +12,21 @@ export default class extends React.Component {
     const session = await NextAuth.init({force: true, req: req})
 
     const cookies = new Cookies((req && req.headers.cookie) ? req.headers.cookie : null)
-    
-    // If the user is signed in, we look for a redirect URL cookie and send 
+
+    console.log(req.user);
+
+    // If the user is signed in, we look for a redirect URL cookie and send
     // them to that page, so that people signing in end up back on the page they
     // were on before signing in. Defaults to '/'.
     let redirectTo = '/'
     if (session.user) {
       // Read redirect URL to redirect to from cookies
       redirectTo = cookies.get('redirect_url') || redirectTo
-      
+
       // Allow relative paths only - strip protocol/host/port if they exist.
       redirectTo = redirectTo.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '')
     }
-    
+
     return {
       session: session,
       redirectTo: redirectTo
