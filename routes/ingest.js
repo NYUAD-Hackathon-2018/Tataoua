@@ -49,6 +49,6 @@ module.exports = (expressApp, functions) => {
     } else {
       return res.status(403).json({error: 'Must be signed in to get profile'})
     }
-  }),
+  })
 
 };
