@@ -9,7 +9,11 @@ import asyncio
 
 # filename = wget.download("https://www.volunteermatch.org/search/index.jsp#k=&v=false&s=1&o=distanceBand&l=United+States&r=20&sk=&specialGroupsData.groupSize=&na=&partner=&usafc=")
 async def main():
+<<<<<<< HEAD
     for k in range(180,500):
+=======
+    for k in range(1,200):
+>>>>>>> d01fb9fb530eb0f5c3f1038abb27b6d4491c106e
         browser = await launch()
         page = await browser.newPage()
         await page.goto("https://www.volunteermatch.org/search/?aff=&amp;includeOnGoing=true&amp;r=country&amp;l=United+States&amp;o=distanceBand&amp;s="+str(k)+"1%20search_pages#k=&v=false&s="+str(k)+"1&o=distanceBand&l=New+York%2C+NY%2C+USA&r=20&sk=&specialGroupsData.groupSize=&na=&partner=&usafc=")
@@ -28,7 +32,11 @@ async def main():
                 for j in soup2.findAll("img", {"class":"sprite_profile"}):
                     print(j['title'])
                     tags.append(j['title'])
+<<<<<<< HEAD
                 outputFile = open("output2.txt", "a")
+=======
+                outputFile = open("output.txt", "a")
+>>>>>>> d01fb9fb530eb0f5c3f1038abb27b6d4491c106e
                 for i in tags:
                     outputFile.write("__label__"+i.replace(" ","")+" ")
                 outputFile.write(text+"\n")
