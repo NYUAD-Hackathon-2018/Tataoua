@@ -4,7 +4,7 @@ import Router from 'next/router'
 import FontAwesome from 'react-fontawesome'
 import Page from '../../components/page'
 
-const ProjectDetails = ({ hide }) => (
+const ProjectDetails = ({ hide, data }) => (
   <div style={{
     display: 'flex',
     justifyContent: 'center',
@@ -26,7 +26,7 @@ const ProjectDetails = ({ hide }) => (
       <div style={{
         width: '100%',
         height: '400px',
-        background: "url('/static/imgs/main_background.jpg')",
+        background: `url('${data.image}')`,
         backgroundSize: 'cover',
         position: 'relative'
       }}>
@@ -42,25 +42,17 @@ const ProjectDetails = ({ hide }) => (
         }}>X</div>
       </div>
       <div style={{ flex: 2, padding: '10px' }}>
-        <div>Books2Benefit Charity Book Sale 2017</div>
-        <div>Apr 28 - May 4, 2018</div>
-        <div>NGO: Care2Share</div>
-        <p>
-          Dear Friends and Patrons,
-
-          This is to let you know that the Books2Benefit Charity Booksale has been postponed from September 7 and 8, 2017 to November 24 and 25, 2017 to encourage wider participation from across the country. Kindly note we will be continuing to receive book donations and will be activating the Volunteer registrations towards the beginning of October, 2017. Meanwhile, do register you interests on www.books2benefit.me.
-          Thank you so much for all your support!
-
-          Regards,
-          The Books2Benefit UAE Team
-      </p>
+        <div>{data.title}</div>
+        <div>{data.date}</div>
+        <div>NGO: {data.ngo}</div>
+        <p>{data.content}</p>
       </div>
     </div>
   </div>
 )
 
 
-const ProjectPreview = ({ show }) => (
+const ProjectPreview = ({ show, data }) => (
   <div style={{
     display: 'flex',
     flexDirection: 'row',
@@ -70,12 +62,13 @@ const ProjectPreview = ({ show }) => (
   }}>
     <div style={{
       flex: 1,
-      background: "url('/static/imgs/main_background.jpg')", backgroundSize: 'cover',
+      background: `url('${data.image}')`,
+      backgroundSize: 'cover',
     }} />
     <div style={{ flex: 2, padding: '10px' }}>
-      <div>Books2Benefit Charity Book Sale 2017</div>
-      <div>Apr 28 - May 4, 2018</div>
-      <div>NGO: Care2Share</div>
+      <div>{data.title}</div>
+      <div>{data.date}</div>
+      <div>NGO: {data.ngo}</div>
       <p style={{
         wordBreak: 'break-word',
         overflow: 'hidden',
@@ -86,13 +79,7 @@ const ProjectPreview = ({ show }) => (
         WebkitLineClamp: 3,
         WebkitBoxOrient: 'vertical'
       }}>
-        Dear Friends and Patrons,
-
-        This is to let you know that the Books2Benefit Charity Booksale has been postponed from September 7 and 8, 2017 to November 24 and 25, 2017 to encourage wider participation from across the country. Kindly note we will be continuing to receive book donations and will be activating the Volunteer registrations towards the beginning of October, 2017. Meanwhile, do register you interests on www.books2benefit.me.
-        Thank you so much for all your support!
-
-        Regards,
-        The Books2Benefit UAE Team
+        {data.content}
       </p>
       <button onClick={show} style={{
         backgroundColor: 'transparent',
@@ -108,10 +95,20 @@ const ProjectPreview = ({ show }) => (
 )
 
 export default class extends Page {
-  constructor(props) {
-    super(props)
+  state = { showDetails: false }
+  data = {
+    title: 'Books2Benefit Charity Book Sale 2017',
+    date: 'Apr 28 - May 4, 2018',
+    ngo: 'Care2Share',
+    image: '/static/imgs/project.png',
+    content:
+      `Dear Friends and Patrons,
 
-    this.state = { showDetails: false }
+      This is to let you know that the Books2Benefit Charity Booksale has been postponed from September 7 and 8, 2017 to November 24 and 25, 2017 to encourage wider participation from across the country. Kindly note we will be continuing to receive book donations and will be activating the Volunteer registrations towards the beginning of October, 2017. Meanwhile, do register you interests on www.books2benefit.me.
+      Thank you so much for all your support!
+
+      Regards,
+      The Books2Benefit UAE Team`
   }
 
   showDetails = () => {
@@ -158,10 +155,10 @@ export default class extends Page {
           padding: '20px'
         }}>
           {/* project container */}
-          <ProjectPreview show={this.showDetails.bind(this)} />
-          <ProjectPreview show={this.showDetails.bind(this)} />
-          <ProjectPreview show={this.showDetails.bind(this)} />
-          <ProjectPreview show={this.showDetails.bind(this)} />
+          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
+          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
+          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
+          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
         </div>
 
         <div style={{ textAlign: 'center' }}>
@@ -174,7 +171,7 @@ export default class extends Page {
         </div>
         {
           this.state.showDetails &&
-          <ProjectDetails hide={() => this.setState({ showDetails: false })} />
+          <ProjectDetails data={this.data} hide={() => this.setState({ showDetails: false })} />
         }
       </div>
     )
