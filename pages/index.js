@@ -4,7 +4,6 @@ import Router from 'next/router'
 import FontAwesome from 'react-fontawesome'
 import Page from '../components/page'
 import Layout from '../components/layout'
-import '../css/main.css'
 
 const authBtnStyle = {
   background: "rgba(240, 163, 10, 0.82)",
@@ -52,7 +51,7 @@ export default class extends Page {
         }}>
           <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
 
-          <span style={{ color: 'rgb(255, 166, 0)', fontSize: '40px' }}>
+          <span style={{ color: 'rgb(255, 166, 0)', fontSize: '35px' }}>
             Welcome to the first Volunteering website for companies
           </span>
 
@@ -60,12 +59,12 @@ export default class extends Page {
 
             <Link href='/signup'>
               <button style={authBtnStyle}>
-                Sign up <FontAwesome name='sign-out' />
+                Sign up <img src="/static/icons/user-plus.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
               </button>
             </Link>
 
             <button style={authBtnStyle}>
-              login <FontAwesome name='sign-out' />
+              login <img src="/static/icons/signup.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
             </button>
           </div>
         </div>
