@@ -13,7 +13,13 @@ export default class extends React.Component {
 
     const cookies = new Cookies((req && req.headers.cookie) ? req.headers.cookie : null)
 
-    console.log(req.user);
+    // Intercept user for onboarding if no type defined.
+    if (req.user && !req.user.type) {
+      return {
+        session,
+        redirectTo: '/enroll/onboard'
+      };
+    }
 
     // If the user is signed in, we look for a redirect URL cookie and send
     // them to that page, so that people signing in end up back on the page they
