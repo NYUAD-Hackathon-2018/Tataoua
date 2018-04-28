@@ -65,6 +65,16 @@ export default class extends Page {
               Welcome to Our <br />
               Community !
             </span>
+            <br />
+            <Link href='/projects'>
+              <span style={{
+                fontSize: '20px',
+                color: '#0099cc',
+                cursor: 'pointer'
+              }}>
+                Go to projects page
+              </span>
+            </Link>
           </div>
         </div>
       </div>

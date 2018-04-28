@@ -43,9 +43,10 @@ const LoginMethod = ({ name, href = '', toggle }) => (
 
 
 export default class extends Page {
-  state = { selectedType: '', interests: [] }
+  state = { selectedType: '', categories: [] }
 
   singup = () => {
+    Router.push('/signup/success')
   }
 
   toggleSelection = selectedType => () => {
@@ -61,40 +62,39 @@ export default class extends Page {
     this.setState({ selectedType })
   }
 
-  toggleInterst = interest => () => {
-    const { interests } = this.state
-    const index = interests.indexOf(interest)
+  toggleCategory = category => () => {
+    const { categories } = this.state
+    const index = categories.indexOf(category)
     if (index < 0) {
-      interests.push(interest)
+      categories.push(category)
     } else {
-      interests.splice(index, 1)
+      categories.splice(index, 1)
     }
 
-    this.setState({ interests })
+    this.setState({ categories })
   }
-
-  renderInterestsList = list => (
-    <div />
-  )
 
   componentDidMount() {
     fetch('/ingest/twitter/timeline', {
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(json => this.setState(json))
-      .catch(err => this.setState({ tweets: [ "test" ], categories: [ "children&youth", "arts&culture", "education&literacy" ] }));
+      .then(res => {
+        if (res.error) {
+          this.setState({ tweets: ["test"], categories: ["children&youth", "arts&culture", "education&literacy"] })
+        } else {
+          this.setState(res)
+        }
+      });
   }
 
-    render() {
-    const interests = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  render() {
     return (
       <div style={{
         background: "url('/static/imgs/main_background.jpg') no-repeat center center",
         paddingTop: '50px',
         height: 'calc(100vh - 65px)'
       }}>
-
         <div style={{
           padding: '0 20px 0 5px',
           display: "flex",
@@ -135,24 +135,24 @@ export default class extends Page {
           marginTop: '20px'
         }}>
           <div>
-            <Input disabled placeholder={'Username'} icon={'/static/icons/user.svg'} />
-            <Input disabled placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
-            <Input disabled placeholder={'NGO name'} icon={'/static/icons/twitter.svg'} />
+            <Input placeholder={'Username'} icon={'/static/icons/user.svg'} />
+            <Input placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
 
             {/* intrests */}
             <div style={{
               margin: '10px 0',
               display: 'grid',
-              gridTemplateColumns: 'repeat(5, 1fr)'
+              gridTemplateColumns: 'repeat(2, 1fr)'
             }}>
               {
-                interests.map((interest, index) => (
-                  <div key={interest} onClick={this.toggleInterst(interest)}>
+                this.state.categories.map((category, index) => (
+                  <div key={category}>
                     <span style={{ margin: '5px' }}>
                       <input
                         type='checkbox'
-                        checked={this.state.interests.includes(interest)} />
-                      <span>{interest}</span>
+                        onChange={this.toggleCategory(category)}
+                        checked={this.state.categories.includes(category)} />
+                      <span>{category.replace('&', ' and ')}</span>
                     </span>
                   </div>
                 ))
