@@ -82,7 +82,8 @@ export default class extends Page {
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(json => this.setState(json));
+      .then(json => this.setState(json))
+      .catch(err => this.setState({ tweets: [ "test" ], categories: [ "children&youth", "arts&culture", "education&literacy" ] }));
   }
 
     render() {
