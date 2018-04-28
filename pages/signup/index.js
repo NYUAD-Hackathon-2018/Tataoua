@@ -46,7 +46,10 @@ export default class extends Page {
   state = { selectedType: '', categories: [] }
 
   singup = () => {
-    Router.push('/signup/success')
+    Router.push({
+      pathname: '/signup/success',
+      query: { type: this.state.selectedType }
+    })
   }
 
   toggleSelection = selectedType => () => {

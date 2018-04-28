@@ -5,6 +5,12 @@ import Page from '../../components/page'
 
 
 export default class extends Page {
+  static getInitialProps(props) {
+    console.log(props)
+    const { query: { type = 'ngo' } } = props;
+    return { type };
+  }
+
   render() {
     return (
       <div style={{
@@ -66,7 +72,10 @@ export default class extends Page {
               Community !
             </span>
             <br />
-            <Link href='/projects'>
+            <Link href={{
+              pathname: '/projects',
+              query: { type: this.props.type }
+            }}>
               <span style={{
                 fontSize: '20px',
                 color: '#0099cc',

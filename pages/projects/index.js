@@ -125,6 +125,12 @@ const ProjectPreview = ({ show, data }) => (
 
 export default class extends Page {
   state = { showDetails: false }
+
+  static getInitialProps(props) {
+    const { query: { type = 'ngo' } } = props;
+    return { type };
+  }
+
   data = {
     title: 'Books2Benefit Charity Book Sale 2017',
     date: 'Apr 28 - May 4, 2018',
@@ -164,15 +170,36 @@ export default class extends Page {
           height: '100px',
           flex: 1,
           alignItems: 'center',
-          justifyContent: 'start',
+          justifyContent: 'space-between',
           backgroundColor: '#f2f2f2',
           boxShadow: '#00000052 0px 0px 3px 0px'
         }}>
-          <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
+          <div style={{
+            display: "flex",
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+            <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
 
-          <span style={{ color: 'rgb(255, 166, 0)', fontSize: '40px' }}>
-            Volunteering opportunities
-          </span>
+            <span style={{ color: 'rgb(255, 166, 0)', fontSize: '40px' }}>
+              Volunteering opportunities
+            </span>
+          </div>
+
+          {this.props.type === 'ngo' && <button
+            onClick={() => { this.setState({ applied: true }) }}
+            style={{
+              backgroundColor: 'rgb(255, 166, 0)',
+              borderRadius: '5px',
+              color: '#fff',
+              cursor: 'pointer',
+              border: 'none',
+              outiline: 'none',
+              padding: '10px',
+              fontSize: '17px'
+            }}>
+            <img src="/static/imgs/add.png" style={{ width: '20px', marginBottom: '-5px' }} />  Add new project
+          </button>}
         </div>
 
         <div id="projectsContainer" style={{
