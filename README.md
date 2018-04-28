@@ -12,8 +12,6 @@ It includes the following features:
 * Bootstrap 3.3.7 for front end design.
 * Analysing data from twitter trends by machine learning technology to know most interests.
 
-You can see a live demo at **https://nextjs-starter.now.sh**
-
 ## About 
 
 Tataoua is a website that makes connection between the NGO and the volunteer. the volunteer can be individual person or company. its main target is making volunteering process moee efficient and more easy by using modern technologiges. with Tataoua the NGO is able to post the problem with all details of it to ask for help and the volunteer is able to response and help in this problem easily. Tataoua is using machine learning technology to analyse data from twitter trends to know the interests so it makes volunteering more easy and efficient. 
