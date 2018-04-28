@@ -5,6 +5,7 @@
 
 const fetch = require('node-fetch');
 const OAuth = require('oauth').OAuth;
+const { Analytics }= require('../fastText-0.1.0/Analytics.js');
 
 module.exports = (expressApp, functions) => {
 
@@ -41,7 +42,16 @@ module.exports = (expressApp, functions) => {
               });
           });
         })
-        .then(data => res.json(data))
+        .then(data => data.map(v => v.text))
+        .then(tweets => {
+          let joinedStr = tweets.join(' ');
+          let categories = Analytics.analyzeTweets(joinedStr, 3);
+
+          res.json({
+            tweets,
+            categories
+          });
+        })
         .catch(err => {
           console.log(err);
           return res.status(500).json({error: 'Unable to fetch profile'})

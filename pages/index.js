@@ -73,7 +73,6 @@ export default class extends Page {
 
     let authComponent = (this.props.session && this.props.session.user) ? logoutComponent : loginComponent;
     return (
-      <Layout {...this.props} navmenu={false} container={false}>
       <div style={{
         background: "url('/static/imgs/main_background.jpg') no-repeat center center",
         paddingTop: '50px',
@@ -157,7 +156,6 @@ export default class extends Page {
           </div>
         </div>
       </div>
-      </Layout>
     )
   }
 }

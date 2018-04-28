@@ -41,7 +41,8 @@
     "reactstrap": "^5.0.0-alpha.4",
     "sass-loader": "^6.0.6",
     "universal-cookie": "^2.1.2",
-    "watson-developer-cloud": "^3.4.0"
+    "watson-developer-cloud": "^3.4.0",
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "eslint": "^4.5.0",

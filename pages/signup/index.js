@@ -4,6 +4,7 @@ import Router from 'next/router'
 import FontAwesome from 'react-fontawesome'
 import Page from '../../components/page'
 import Input from '../../components/materialInput'
+import 'whatwg-fetch';
 
 const rowStyle = {
   container: {
@@ -76,7 +77,15 @@ export default class extends Page {
     <div />
   )
 
-  render() {
+  componentDidMount() {
+    fetch('/ingest/twitter/timeline', {
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(json => this.setState(json));
+  }
+
+    render() {
     const interests = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     return (
       <div style={{
