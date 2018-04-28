@@ -4,6 +4,12 @@ import Router from 'next/router'
 import FontAwesome from 'react-fontawesome'
 import Page from '../components/page'
 import Layout from '../components/layout'
+import SignIn from '../components/signin';
+import Cookies from "universal-cookie";
+import {NextAuth} from "next-auth/client";
+import { Container, Row, Col, Nav, NavItem, Button, Form, NavLink, Collapse,
+  Navbar, NavbarToggler, NavbarBrand, Modal, ModalHeader, ModalBody,
+  ModalFooter, ListGroup, ListGroupItem } from 'reactstrap'
 
 const authBtnStyle = {
   background: "rgba(240, 163, 10, 0.82)",
@@ -31,8 +37,43 @@ const rankImgStyle = {
 }
 
 export default class extends Page {
+  async handleSignoutSubmit(event) {
+    event.preventDefault()
+
+    // Save current URL so user is redirected back here after signing out
+    const cookies = new Cookies()
+    cookies.set('redirect_url', window.location.pathname, { path: '/' })
+
+    await NextAuth.signout()
+    Router.push('/')
+  }
+
   render() {
+    let logoutComponent = (
+      <Form id="signout" method="post" action="/auth/signout" onSubmit={this.handleSignoutSubmit}>
+        <input name="_csrf" type="hidden" value={this.props.session.csrfToken}/>
+        <Button type="submit" block className="pl-4 rounded-0 text-left dropdown-item"><span className="icon ion-md-log-out mr-1"></span>Sign out</Button>
+      </Form>
+    );
+    let loginComponent = (
+      <div>
+        <Link href='http://localhost:3000/auth/oauth/twitter'>
+          <button style={authBtnStyle}>
+            Sign Up <img src="/static/icons/user-plus.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
+          </button>
+        </Link>
+
+        <Link href='http://localhost:3000/auth/oauth/twitter'>
+          <button style={authBtnStyle}>
+            Login <img src="/static/icons/signup.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
+          </button>
+        </Link>
+      </div>
+    );
+
+    let authComponent = (this.props.session && this.props.session.user) ? logoutComponent : loginComponent;
     return (
+      <Layout {...this.props} navmenu={false} container={false}>
       <div style={{
         background: "url('/static/imgs/main_background.jpg') no-repeat center center",
         paddingTop: '50px',
@@ -56,16 +97,7 @@ export default class extends Page {
           </span>
 
           <div>
-
-            <Link href='/signup'>
-              <button style={authBtnStyle}>
-                Sign up <img src="/static/icons/user-plus.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
-              </button>
-            </Link>
-
-            <button style={authBtnStyle}>
-              login <img src="/static/icons/signup.svg" alt="" width="20" style={{ marginBottom: '-5px' }} />
-            </button>
+            { authComponent }
           </div>
         </div>
 
@@ -124,7 +156,8 @@ export default class extends Page {
             </div>
           </div>
         </div>
-      </div >
+      </div>
+      </Layout>
     )
   }
 }

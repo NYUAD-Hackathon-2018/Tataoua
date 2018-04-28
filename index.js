@@ -29,7 +29,7 @@ process.on('unhandledRejection', (reason, p) => {
 // Default when run with `npm start` is 'production' and default port is '80'
 // `npm run dev` defaults mode to 'development' & port to '3000'
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
-process.env.PORT = process.env.PORT || 80
+process.env.PORT = process.env.PORT || 3000
 
 // Initialize Next.js
 const nextApp = next({
