@@ -17,7 +17,7 @@ export default class extends React.Component {
     if (req.user && !req.user.type) {
       return {
         session,
-        redirectTo: '/enroll/onboard'
+        redirectTo: '/signup'
       };
     }
 

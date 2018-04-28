@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie'
 import { NextAuth } from 'next-auth/client'
 
 export default class extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -15,9 +15,9 @@ export default class extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
-    
+
   }
-  
+
   handleEmailChange(event) {
     this.setState({
       email: event.target.value.trim()
@@ -26,7 +26,7 @@ export default class extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    
+
     if (!this.state.email) return
 
     // Save current URL so user is redirected back here after signing in
@@ -41,7 +41,7 @@ export default class extends React.Component {
       Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
     })
   }
-  
+
   render() {
     if (this.props.session.user) {
       return(<div/>)
@@ -86,7 +86,7 @@ export class SignInButtons extends React.Component {
                   Sign in with {provider}
                 </a>
               </p>
-              )              
+              )
           })
         }
       </React.Fragment>

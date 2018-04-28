@@ -10,12 +10,14 @@ import Layout from '../../components/layout'
 import SignIn from '../../components/signin'
 
 export default class extends Page {
-  
+
   static async getInitialProps({req, res, query}) {
     let props = await super.getInitialProps({req})
+    console.log(props);
+
     props.session = await NextAuth.init({force: true, req: req})
     props.providers = await NextAuth.providers({req})
-    
+
     // If signed in already, redirect to account management page.
     if (props.session.user) {
       if (req) {
@@ -30,10 +32,10 @@ export default class extends Page {
       const cookies = new Cookies((req && req.headers.cookie) ? req.headers.cookie : null)
       cookies.set('redirect_url', query.redirect, { path: '/' })
     }
-    
+
     return props
   }
-  
+
   render() {
     if (this.props.session.user) {
       return (
