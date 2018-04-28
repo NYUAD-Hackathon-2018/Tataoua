@@ -4,52 +4,81 @@ import Router from 'next/router'
 import FontAwesome from 'react-fontawesome'
 import Page from '../../components/page'
 
-const ProjectDetails = ({ hide, data }) => (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.5)'
-  }}>
-    <div style={{
-      width: '50%',
-      height: '70%',
-      display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: '#fff'
-    }}>
+class ProjectDetails extends React.Component {
+  state = { applied: false }
+
+  render() {
+    const { hide, data } = this.props
+    return (
       <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        height: '100%',
         width: '100%',
-        height: '400px',
-        background: `url('${data.image}')`,
-        backgroundSize: 'cover',
-        position: 'relative'
+        backgroundColor: 'rgba(0,0,0,0.5)'
       }}>
-        <div onClick={hide} style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          backgroundColor: '#fff',
-          width: '20px',
-          borderRadius: '10px',
-          textAlign: 'center',
-          cursor: 'pointer'
-        }}>X</div>
+        <div style={{
+          width: '50%',
+          height: '70%',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#fff'
+        }}>
+          <div style={{
+            width: '100%',
+            height: '400px',
+            background: `url('${data.image}')`,
+            backgroundSize: 'cover',
+            position: 'relative'
+          }}>
+            <div onClick={hide} style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              backgroundColor: '#fff',
+              width: '20px',
+              borderRadius: '10px',
+              textAlign: 'center',
+              cursor: 'pointer'
+            }}>X</div>
+          </div>
+          <div style={{ flex: 2, padding: '10px' }}>
+            <div>{data.title}</div>
+            <div>{data.date}</div>
+            <div>NGO: {data.ngo}</div>
+            <p>{data.content}</p>
+
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <button
+                onClick={() => { this.setState({ applied: true }) }}
+                style={{
+                  backgroundColor: '#0099cc',
+                  borderRadius: '5px',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  border: 'none',
+                  outiline: 'none',
+                  padding: '10px',
+                  fontSize: '17px'
+                }}>
+                {
+                  this.state.applied ?
+                    <span>
+                      <img src="/static/imgs/checked.png" style={{ width: '20px', marginBottom: '-5px' }} />  Applied successfully
+                    </span> : 'Apply for this project'
+                }
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style={{ flex: 2, padding: '10px' }}>
-        <div>{data.title}</div>
-        <div>{data.date}</div>
-        <div>NGO: {data.ngo}</div>
-        <p>{data.content}</p>
-      </div>
-    </div>
-  </div>
-)
+    )
+  }
+}
 
 
 const ProjectPreview = ({ show, data }) => (
