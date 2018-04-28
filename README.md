@@ -18,7 +18,7 @@ Tataoua is a website that makes connection between the NGO and the volunteer. th
 
 ## The application is built with the following architecture:
 
-* Front End: Bootstrap 3.3.7 , proto.io , *Photoshop cs5 , next js
+* Front End: Bootstrap 3.3.7 , proto.io , Photoshop cs5 , next js
 * Back End: Node js , Express js , Fasttext  
 * Database: Mongodb 
 * Demo: after effect
