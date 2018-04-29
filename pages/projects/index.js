@@ -124,31 +124,59 @@ const ProjectPreview = ({ show, data }) => (
 )
 
 export default class extends Page {
-  state = { showDetails: false }
+  state = { showDetails: false, selectedProject: 0 }
 
   static getInitialProps(props) {
     const { query: { type = 'NGO' } } = props;
     return { type };
   }
 
-  data = {
-    title: 'Books2Benefit Charity Book Sale 2017',
-    date: 'Apr 28 - May 4, 2018',
-    ngo: 'Care2Share',
-    image: '/static/imgs/project.png',
-    content:
-      `Dear Friends and Patrons,
+  data = [
+    {
+      title: 'Water Aid',
+      date: 'All year',
+      ngo: 'Water Aid initiative',
+      image: '/static/imgs/water aid.jpg',
+      content:
+        `His Highness Sheikh Mohammed bin Rashid Al Maktoum, Vice-President and Prime Minister of the UAE and Ruler of Dubai has launched the UAE Water Aid initiative as a gift to the world this Holy Month of Ramadan. The aim is to provide drinking water to 5 million people around the world experiencing severe water shortages. You can donate by text message. Text 800733 for information.`
+    }, {
+      title: 'Books2Benefit Charity Book Sale 2017',
+      date: 'Apr 28 - May 4, 2018',
+      ngo: 'Care2Share',
+      image: '/static/imgs/project.png',
+      content:
+        `Dear Friends and Patrons,
 
       This is to let you know that the Books2Benefit Charity Booksale has been postponed from September 7 and 8, 2017 to November 24 and 25, 2017 to encourage wider participation from across the country. Kindly note we will be continuing to receive book donations and will be activating the Volunteer registrations towards the beginning of October, 2017. Meanwhile, do register you interests on www.books2benefit.me.
       Thank you so much for all your support!
 
       Regards,
       The Books2Benefit UAE Team`
-  }
+    }, {
+      title: 'Ramadan Active Wear Drive',
+      date: 'Ramadan',
+      ngo: 'yApparel ',
+      image: '/static/imgs/ramadan.jpg',
+      content:
+        `Want to give back this Ramadan? We do too.From July 1-July 31, join us in our clothing drive to the Dubai Foundation for Women & Children. Here’s how it works:
+        1. DONATE
+        Gather together as many articles of activewear that you’d be willing to donate!
 
-  showDetails = () => {
+        2. DISCOUNT
+        For your amazing efforts, we’ll reward you with a discount voucher valid for your next purchase at yApparel – valid until the end of the year. We’ll take your regular clothes too if you’d like, but only fitness or sports apparel will count`
+    }, {
+      title: 'Filling the Blues',
+      date: 'Mars 12 - Jun 17, 2018',
+      ngo: 'Moti Roti',
+      image: '/static/imgs/filling-the-blues.jpg',
+      content:
+        `Moti Roti has started a campaign where they provide food for labourers.  They are looking for volunteers to help distribute the food and for restaurants to provide the food.  Companies already involved include Moti Roti (of course). Taqado Mexican Kitchen. BookMunch Cafe. Camelicious. Shakeism. The Kebab Shop. Shamiana. Flames Grills & Curries. RoundMenu. iConsultHotels. Timepiece360. Synquatics.`
+    }
+  ]
+
+  showDetails = index => {
     console.log(this.state)
-    this.setState({ showDetails: true })
+    this.setState({ showDetails: true, selectedProject: index })
   }
 
   closeDetails = () => {
@@ -211,10 +239,11 @@ export default class extends Page {
           padding: '20px'
         }}>
           {/* project container */}
-          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
-          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
-          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
-          <ProjectPreview data={this.data} show={this.showDetails.bind(this)} />
+          {
+            this.data.map((project, index) => (
+              <ProjectPreview key={index} data={project} show={() => this.showDetails(index)} />
+            ))
+          }
         </div>
 
         <div style={{ textAlign: 'center' }}>
@@ -227,7 +256,7 @@ export default class extends Page {
         </div>
         {
           this.state.showDetails &&
-          <ProjectDetails data={this.data} hide={() => this.setState({ showDetails: false })} />
+          <ProjectDetails data={this.data[this.state.selectedProject]} hide={() => this.setState({ showDetails: false })} />
         }
       </div>
     )

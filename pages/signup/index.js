@@ -177,7 +177,7 @@ export default class extends Page {
               {
                 this.state.categories.map((category, index) => (
                   <div key={category}>
-                    <label className="checkbox-container">{category.replace('&', ' and ')}
+                    <label className="checkbox-container">{category.replace('&', ' and ').replace('with', ' with ')}
                       <input
                         type='checkbox'
                         onChange={this.toggleCategory(category)}
