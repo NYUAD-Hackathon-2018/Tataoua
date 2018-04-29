@@ -12,7 +12,10 @@ export default class extends React.Component {
     const session = await NextAuth.init({force: true, req: req})
 
     const cookies = new Cookies((req && req.headers.cookie) ? req.headers.cookie : null)
-
+    return {
+      session,
+      redirectTo: '/signup'
+    };
     // Intercept user for onboarding if no type defined.
     if (req.user && !req.user.type) {
       return {
