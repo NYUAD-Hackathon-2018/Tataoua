@@ -91,7 +91,10 @@ export default class extends Page {
           backgroundColor: '#f2f2f2',
           boxShadow: '#00000052 0px 0px 3px 0px'
         }}>
-          <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
+          <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{
+            width: '110px',
+            height: '150px'
+          }} />
 
           <span style={{ color: 'rgb(255, 166, 0)', fontSize: '35px' }}>
             Welcome to the first Volunteering website for companies
@@ -111,52 +114,13 @@ export default class extends Page {
           alignItems: 'center',
           position: 'relative'
         }}>
-          <div style={{ position: 'absolute', left: '50px', zIndex: 1 }}>
+          <div style={{ position: 'absolute', left: '150px', zIndex: 1 }}>
             <img src="/static/imgs/baloon.gif" alt="balloon" style={{
               width: '430px',
               marginTop: '-140px'
             }} />
           </div>
-          <div style={{
-            backgroundColor: '#f2f2f2',
-            height: '250px',
-            padding: '25px 0',
-            width: '50%',
-            display: 'flex',
-            flexDirection: 'row',
-            zIndex: 10,
-            justifyContent: 'space-between'
-          }}>
-            <div style={{
-              display: 'flex',
-              flex: 1,
-              justifyContent: 'flex-start',
-              alignItems: 'start',
-              flexDirection: 'column',
-              fontSize: '24px'
-            }}>
-              <div style={rankRowStyle}>
-                <img src="/static/imgs/1st.png" alt="" style={rankImgStyle} />
-                <span>Abu Dhabi National Energy Company </span>
-              </div>
-              <div style={rankRowStyle}>
-                <img src="/static/imgs/2nd.png" alt="" style={rankImgStyle} />
-                <span>Al Dahra Agricultural Company</span>
-              </div>
-              <div style={rankRowStyle} >
-                <img src="/static/imgs/3rd.png" alt="" style={rankImgStyle} />
-                <span>Dar Al Khaleej Printing and Publishing</span>
-              </div>
-            </div>
-
-            <div>
-              <img src="/static/imgs/trophy.png" alt="" style={{
-                height: '200px',
-                width: 'auto',
-                marginRight: '-70px'
-              }} />
-            </div>
-          </div>
+          <img src="/static/imgs/board.png" width='600' alt="" />
         </div>
       </div>
     )

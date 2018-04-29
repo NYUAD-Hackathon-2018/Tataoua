@@ -121,7 +121,10 @@ export default class extends Page {
           backgroundColor: '#f2f2f2',
           boxShadow: '#00000052 0px 0px 3px 0px'
         }}>
-          <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
+          <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{
+            width: '110px',
+            height: '150px'
+          }} />
 
           <span style={{ color: 'rgb(255, 166, 0)', fontSize: '40px' }}>
             Welcome to the first Volunteering website for companies

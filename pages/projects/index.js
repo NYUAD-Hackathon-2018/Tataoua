@@ -207,7 +207,10 @@ export default class extends Page {
             alignItems: 'center',
             justifyContent: 'flex-start',
           }}>
-            <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{ width: '200px', height: 'auto' }} />
+            <img src="/static/imgs/logo.png" alt="atataoua_logo" style={{
+              width: '110px',
+              height: '150px'
+            }} />
 
             <span style={{ color: 'rgb(255, 166, 0)', fontSize: '40px' }}>
               Volunteering opportunities
