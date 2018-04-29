@@ -45,6 +45,17 @@ const LoginMethod = ({ name, href = '', toggle }) => (
 export default class extends Page {
   state = { selectedType: '', categories: ['environment', 'seniors', 'health', 'women'], selectedCatergories: [] }
 
+  pictures = {
+    'environment': 'environment.jpg',
+    'seniors': 'seniors.jpg',
+    'health': 'health.png',
+    'women': 'women.jpg',
+    'peoplewithdisabilities': 'physical_disability_.jpg',
+    'children&youth': 'youth.jpg',
+    'arts&culture': 'art.jpg',
+    'education&literacy': 'education.jpg'
+  }
+
   singup = () => {
     Router.push({
       pathname: '/projects',
@@ -97,8 +108,8 @@ export default class extends Page {
     return (
       <div style={{
         background: "url('/static/imgs/main_background.jpg') no-repeat center center",
-        paddingTop: '50px',
-        height: 'calc(100vh - 65px)'
+        paddingTop: '30px',
+        height: 'calc(100vh - 45px)'
       }}>
         <div style={{
           padding: '0 20px 0 5px',
@@ -171,13 +182,30 @@ export default class extends Page {
             <div style={{
               margin: '10px 0',
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateColumns: 'repeat(4, 1fr)',
               gridColumnGap: '10px',
             }}>
               {
                 this.state.categories.map((category, index) => (
                   <div key={category}>
-                    <label className="checkbox-container">{category.replace('&', ' and ').replace('with', ' with ')}
+                    <label className="checkbox-container">
+                      <div style={{
+                        background: `url('/static/imgs/categories/${this.pictures[category]}') center center`,
+                        backgroundSize: 'cover',
+                        height: '100px'
+                      }}>
+                        <div style={{
+                          height: "calc(100% - 10px)",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: 'rgba(0,0,0,0.5)',
+                          color: '#fff',
+                          padding: '5px'
+                        }}>
+                          {category.replace('&', ' and ').replace('with', ' with ')}
+                        </div>
+                      </div>
                       <input
                         type='checkbox'
                         onChange={this.toggleCategory(category)}
@@ -266,16 +294,17 @@ export default class extends Page {
               }
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <button onClick={this.singup} style={{
                 padding: '10px 15px',
                 border: 'none',
                 outline: 'none',
                 cursor: 'pointer',
                 color: '#fff',
-                width: '100%',
+                width: '50%',
                 fontSize: '16px',
-                backgroundColor: 'rgb(255, 166, 0)'
+                backgroundColor: 'rgb(255, 166, 0)',
+                boxShadow: '#0000009e 0px 1px 1px 1px'
               }}>
                 Submit
               </button>
