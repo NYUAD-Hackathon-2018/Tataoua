@@ -97,7 +97,7 @@ export default class extends Page {
           }} />
 
           <span style={{ color: 'rgb(255, 166, 0)', fontSize: '35px' }}>
-            Welcome to the first Volunteering website for companies
+            Welcome to the First Corporate Volunteering League
           </span>
 
           <div>
