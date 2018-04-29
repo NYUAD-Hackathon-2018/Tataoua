@@ -143,6 +143,28 @@ export default class extends Page {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Input placeholder={'Username'} icon={'/static/icons/user.svg'} />
               <Input placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
+              {
+                this.state.selectedType === "Individual" &&
+                <div style={{}}>
+                  <img src="/static/icons/case.svg" style={{
+                    width: '30px',
+                    marginBottom: '-10px',
+                    marginRight: '10px'
+                  }} alt="" />
+
+                  <select name="" id="" style={{
+                    padding: '5px',
+                    margin: '10px 0'
+                  }}>
+                    <option value="">Select your company</option>
+                    <option value="">Abu Dhabi National Energy Company</option>
+                    <option value="">Al Dahra Agricultural Company</option>
+                    <option value="">Al Ghurair Group</option>
+                    <option value="">Dar Al Khaleej Printing and Publishing</option>
+                    <option value="">The Emirates Group</option>
+                  </select>
+                </div>
+              }
             </div>
 
             {/* intrests */}
