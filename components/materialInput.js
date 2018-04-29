@@ -2,10 +2,11 @@ import Link from 'next/link'
 import React from 'react'
 import Router from 'next/router'
 
-const Input = ({ placeholder, disabled, icon, onChange = () => { }, required }) => (
+const Input = ({ value = '', placeholder, disabled, icon, onChange = () => { }, required }) => (
   <div style={{ margin: '5px' }}>
     {icon && <img src={icon} alt="" className="inputIcon" />}
     <input
+      value={value}
       type="text"
       className="formInput"
       placeholder={placeholder}

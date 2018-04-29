@@ -43,10 +43,11 @@ const LoginMethod = ({ name, href = '', toggle }) => (
 
 
 export default class extends Page {
-  state = { selectedType: '', categories: ['environment', 'seniors', 'health', 'women'], selectedCatergories: [] }
+  state = { selectedType: '', categories: ['environment', 'animals', 'seniors', 'health', 'women'], selectedCatergories: [] }
 
   pictures = {
     'environment': 'environment.jpg',
+    'animals': 'pets.jpg',
     'seniors': 'seniors.jpg',
     'health': 'health.png',
     'women': 'women.jpg',
@@ -155,8 +156,8 @@ export default class extends Page {
         }}>
           <div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Input placeholder={'Username'} icon={'/static/icons/user.svg'} />
-              <Input placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
+              <Input value='Mathew Smith' placeholder={'Username'} icon={'/static/icons/user.svg'} />
+              {/* <Input value='' placeholder={'Phone number'} icon={'/static/icons/phone.svg'} /> */}
               {
                 this.state.selectedType === "Individual" &&
                 <div style={{}}>
