@@ -43,11 +43,11 @@ const LoginMethod = ({ name, href = '', toggle }) => (
 
 
 export default class extends Page {
-  state = { selectedType: '', categories: [] }
+  state = { selectedType: '', categories: ['environment', 'seniors', 'health', 'women'], selectedCatergories: [] }
 
   singup = () => {
     Router.push({
-      pathname: '/signup/success',
+      pathname: '/projects',
       query: { type: this.state.selectedType }
     })
   }
@@ -66,15 +66,15 @@ export default class extends Page {
   }
 
   toggleCategory = category => () => {
-    const { categories } = this.state
-    const index = categories.indexOf(category)
+    const { selectedCatergories } = this.state
+    const index = selectedCatergories.indexOf(category)
     if (index < 0) {
-      categories.push(category)
+      selectedCatergories.push(category)
     } else {
-      categories.splice(index, 1)
+      selectedCatergories.splice(index, 1)
     }
 
-    this.setState({ categories })
+    this.setState({ selectedCatergories })
   }
 
   componentDidMount() {
@@ -84,9 +84,11 @@ export default class extends Page {
       .then(res => res.json())
       .then(res => {
         if (res.error) {
-          this.setState({ tweets: ["test"], categories: ["children&youth", "arts&culture", "education&literacy"] })
+          const categories = ["children&youth", "arts&culture", "education&literacy"]
+          this.setState({ categories: categories.concat(this.state.categories), selectedCatergories: [].concat(categories) })
         } else {
-          this.setState(res)
+          const { categories } = res
+          this.setState({ categories: categories.concat(this.state.categories), selectedCatergories: [].concat(categories) })
         }
       });
   }
@@ -138,25 +140,105 @@ export default class extends Page {
           marginTop: '20px'
         }}>
           <div>
-            <Input placeholder={'Username'} icon={'/static/icons/user.svg'} />
-            <Input placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Input placeholder={'Username'} icon={'/static/icons/user.svg'} />
+              <Input placeholder={'Phone number'} icon={'/static/icons/phone.svg'} />
+            </div>
 
             {/* intrests */}
             <div style={{
               margin: '10px 0',
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)'
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridColumnGap: '10px',
             }}>
               {
                 this.state.categories.map((category, index) => (
                   <div key={category}>
-                    <span style={{ margin: '5px' }}>
+                    <label className="checkbox-container">{category.replace('&', ' and ')}
                       <input
                         type='checkbox'
                         onChange={this.toggleCategory(category)}
-                        checked={this.state.categories.includes(category)} />
-                      <span>{category.replace('&', ' and ')}</span>
-                    </span>
+                        checked={this.state.selectedCatergories.includes(category)} />
+                      <span className="checkmark">&#x2713;</span>
+                    </label>
+                    <style jsx>{`
+                      /* The container */
+                      .checkbox-container {
+                          display: block;
+                          position: relative;
+                          padding-left: 35px;
+                          margin-bottom: 12px;
+                          cursor: pointer;
+                          font-size: 22px;
+                          -webkit-user-select: none;
+                          -moz-user-select: none;
+                          -ms-user-select: none;
+                          user-select: none;
+                          text-transform: capitalize
+                      }
+
+                      /* Hide the browser's default checkbox */
+                      .checkbox-container input {
+                          position: absolute;
+                          opacity: 0;
+                          cursor: pointer;
+                      }
+
+                      /* Create a custom checkbox */
+                      .checkmark {
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          height: 25px;
+                          width: 25px;
+                          background-color: #eee;
+                          text-align: center;
+                          line-height: 28px;
+                          color: transparent;
+                      }
+
+                      /* On mouse-over, add a grey background color */
+                      .checkbox-container:hover input ~ .checkmark {
+                          background-color: #ccc;
+                      }
+
+                      /* When the checkbox is checked, add a blue background */
+                      .checkbox-container input:checked ~ .checkmark {
+                          background-color: #2196F3;
+                      }
+
+                      /* Create the checkmark/indicator (hidden when not checked) */
+                      .checkbox-container:after {
+                          content: "";
+                          position: absolute;
+                          display: none;
+                      }
+
+                      /* Show the checkmark when checked */
+                      .checkbox-container input:checked ~ .checkmark:after {
+                          display: block;
+                          color: white;
+                      }
+
+                      /* Show the checkmark when checked */
+                      .checkbox-container input:checked ~ .checkmark {
+                          color: white;
+                      }
+
+                      .checkbox-container .checkmark:after {
+                          left: 9px;
+                          top: 5px;
+                          width: 5px;
+                          height: 10px;
+                          border: solid white;
+                          border-width: 0 3px 3px 0;
+                          -webkit-transform: rotate(45deg);
+                          -ms-transform: rotate(45deg);
+                          transform: rotate(45deg);
+                          color: white;
+                      }
+                    `}</style>
                   </div>
                 ))
               }

@@ -127,7 +127,7 @@ export default class extends Page {
   state = { showDetails: false }
 
   static getInitialProps(props) {
-    const { query: { type = 'ngo' } } = props;
+    const { query: { type = 'NGO' } } = props;
     return { type };
   }
 
@@ -186,7 +186,7 @@ export default class extends Page {
             </span>
           </div>
 
-          {this.props.type === 'ngo' && <button
+          {this.props.type === 'NGO' && <button
             onClick={() => { this.setState({ applied: true }) }}
             style={{
               backgroundColor: 'rgb(255, 166, 0)',

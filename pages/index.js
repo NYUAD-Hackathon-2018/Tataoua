@@ -6,10 +6,12 @@ import Page from '../components/page'
 import Layout from '../components/layout'
 import SignIn from '../components/signin';
 import Cookies from "universal-cookie";
-import {NextAuth} from "next-auth/client";
-import { Container, Row, Col, Nav, NavItem, Button, Form, NavLink, Collapse,
+import { NextAuth } from "next-auth/client";
+import {
+  Container, Row, Col, Nav, NavItem, Button, Form, NavLink, Collapse,
   Navbar, NavbarToggler, NavbarBrand, Modal, ModalHeader, ModalBody,
-  ModalFooter, ListGroup, ListGroupItem } from 'reactstrap'
+  ModalFooter, ListGroup, ListGroupItem
+} from 'reactstrap'
 
 const authBtnStyle = {
   background: "rgba(240, 163, 10, 0.82)",
@@ -51,7 +53,7 @@ export default class extends Page {
   render() {
     let logoutComponent = (
       <Form id="signout" method="post" action="/auth/signout" onSubmit={this.handleSignoutSubmit}>
-        <input name="_csrf" type="hidden" value={this.props.session.csrfToken}/>
+        <input name="_csrf" type="hidden" value={this.props.session.csrfToken} />
         <Button type="submit" block className="pl-4 rounded-0 text-left dropdown-item"><span className="icon ion-md-log-out mr-1"></span>Sign out</Button>
       </Form>
     );
@@ -96,11 +98,11 @@ export default class extends Page {
           </span>
 
           <div>
-            { authComponent }
+            {authComponent}
           </div>
         </div>
 
-        <h2 style={{ textAlign: 'center', color: '#5c3300', marginTop: '50px' }}>
+        <h2 style={{ textAlign: 'center', color: '#5c3300', marginTop: '55px' }}>
           Our Leaderboard for this year
         </h2>
         <div style={{
@@ -130,7 +132,8 @@ export default class extends Page {
               flex: 1,
               justifyContent: 'flex-start',
               alignItems: 'start',
-              flexDirection: 'column'
+              flexDirection: 'column',
+              fontSize: '24px'
             }}>
               <div style={rankRowStyle}>
                 <img src="/static/imgs/1st.png" alt="" style={rankImgStyle} />
